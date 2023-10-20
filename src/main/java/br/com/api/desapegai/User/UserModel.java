@@ -1,18 +1,14 @@
 package br.com.api.desapegai.User;
-
 import java.util.List;
 import br.com.api.desapegai.Ad.AdModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "users") // Especifica o nome da tabela para UserModel
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

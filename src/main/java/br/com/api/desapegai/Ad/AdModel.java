@@ -1,19 +1,10 @@
 package br.com.api.desapegai.Ad;
-
 import java.util.List;
-
-import javax.imageio.IIOImage;
-import javax.xml.stream.events.Comment;
+import br.com.api.desapegai.AdImage.AdImageModel;
 import br.com.api.desapegai.Category.CategoryModel;
+import br.com.api.desapegai.Comment.CommentModel;
 import br.com.api.desapegai.User.UserModel;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
@@ -21,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Table(name = "ads") // Especifica o nome da tabela para AdModel
 public class AdModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +26,14 @@ public class AdModel {
     private CategoryModel category;
     
     @OneToMany(mappedBy = "ad")
-    private List<Comment> comments; // Comentários relacionados ao anúncio
+    private List<CommentModel> comments; // Comentários relacionados ao anúncio
 
     @ManyToOne
     private UserModel seller; // Usuário que publicou o anúncio
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ad_id")
-    private List<IIOImage> images; // Imagens relacionadas ao anúncio
+    private List<AdImageModel> images; // Imagens relacionadas ao anúncio
 
     private Date publicationDate;
     private String status; // Ativo, expirado, vendido, etc.

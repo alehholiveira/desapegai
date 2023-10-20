@@ -1,8 +1,7 @@
-package br.com.api.desapegai.Comment; // Correção para CommentModel
+package br.com.api.desapegai.Comment; 
 import java.util.Date;
-
 import br.com.api.desapegai.Ad.AdModel;
-import br.com.api.desapegai.User.UserModel; // Correção para User
+import br.com.api.desapegai.User.UserModel; 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class CommentModel { // Correção para CommentModel
+@Table(name = "comments") // Especifica o nome da tabela para CommentModel
+public class CommentModel { 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +18,10 @@ public class CommentModel { // Correção para CommentModel
     private Date creationDate;
 
     @ManyToOne
-    private UserModel user; // Correção para User
+    private UserModel user; 
 
     @ManyToOne
-    private AdModel ad; // Correção para AdModel
+    private AdModel ad; 
 
     
 }

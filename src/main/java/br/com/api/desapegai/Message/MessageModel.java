@@ -1,17 +1,14 @@
 package br.com.api.desapegai.Message;
 import java.util.Date;
 import br.com.api.desapegai.User.UserModel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "messages") // Especifica o nome da tabela para MessageModel
 public class MessageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
