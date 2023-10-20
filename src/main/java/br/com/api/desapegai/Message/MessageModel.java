@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "messages") // Especifica o nome da tabela para MessageModel
 public class MessageModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
     private Date sendDate;

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name = "users") // Especifica o nome da tabela para UserModel
 public class UserModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;

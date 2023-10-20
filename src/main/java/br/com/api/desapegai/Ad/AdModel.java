@@ -1,6 +1,5 @@
 package br.com.api.desapegai.Ad;
 import java.util.List;
-import br.com.api.desapegai.AdImage.AdImageModel;
 import br.com.api.desapegai.Category.CategoryModel;
 import br.com.api.desapegai.Comment.CommentModel;
 import br.com.api.desapegai.User.UserModel;
@@ -12,10 +11,10 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "ads") // Especifica o nome da tabela para AdModel
+@Table(name = "ads")
 public class AdModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String description;
@@ -31,9 +30,9 @@ public class AdModel {
     @ManyToOne
     private UserModel seller; // Usuário que publicou o anúncio
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ad_id")
-    private List<AdImageModel> images; // Imagens relacionadas ao anúncio
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] images; // Imagens relacionadas ao anúncio
 
     private Date publicationDate;
     private String status; // Ativo, expirado, vendido, etc.
