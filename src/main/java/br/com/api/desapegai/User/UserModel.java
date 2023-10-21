@@ -14,6 +14,7 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String username;
     private String email;
     private String password; // A senha deve ser armazenada de forma segura (não como texto simples)
     private String address;
