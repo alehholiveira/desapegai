@@ -13,17 +13,17 @@ public class MessageController {
     }
 
     @GetMapping
-    public Iterable<MessageModel> getAllMessages() {
+    public Iterable<Message> getAllMessages() {
         return messageService.getAllMessages();
     }
 
     @GetMapping("/{id}")
-    public MessageModel getMessageById(@PathVariable Long id) {
+    public Message getMessageById(@PathVariable Long id) {
         return messageService.getMessageById(id);
     }
 
     @PostMapping
-    public MessageModel createMessage(@RequestBody MessageModel message) {
+    public Message createMessage(@RequestBody Message message) {
         return messageService.createMessage(message);
     }
 

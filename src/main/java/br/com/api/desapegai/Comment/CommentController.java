@@ -15,22 +15,22 @@ public class CommentController {
     }
 
     @GetMapping
-    public Iterable<CommentModel> getAllComments() {
+    public Iterable<Comment> getAllComments() {
         return commentService.getAllComments();
     }
 
     @GetMapping("/{id}")
-    public CommentModel getCommentById(@PathVariable Long id) {
+    public Comment getCommentById(@PathVariable Long id) {
         return commentService.getCommentById(id);
     }
 
     @PostMapping
-    public CommentModel createComment(@RequestBody CommentModel comment) {
+    public Comment createComment(@RequestBody Comment comment) {
         return commentService.createComment(comment);
     }
 
     @PutMapping("/{id}")
-    public CommentModel updateComment(@PathVariable Long id, @RequestBody CommentModel comment) {
+    public Comment updateComment(@PathVariable Long id, @RequestBody Comment comment) {
         return commentService.updateComment(id, comment);
     }
 

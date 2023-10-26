@@ -12,22 +12,22 @@ public class AdService {
         this.adRepository = adRepository;
     }
 
-    public List<AdModel> getAllAds() {
-        Iterable<AdModel> adIterable = adRepository.findAll();
-        List<AdModel> adList = new ArrayList<>();
+    public List<Ad> getAllAds() {
+        Iterable<Ad> adIterable = adRepository.findAll();
+        List<Ad> adList = new ArrayList<>();
         adIterable.forEach(adList::add);
         return adList;
     }
 
-    public AdModel getAdById(Long id) {
+    public Ad getAdById(Long id) {
         return adRepository.findById(id).orElse(null);
     }
 
-    public AdModel createAd(AdModel adModel) {
+    public Ad createAd(Ad adModel) {
         return adRepository.save(adModel);
     }
 
-    public AdModel updateAd(Long id, AdModel adModel) {
+    public Ad updateAd(Long id, Ad adModel) {
         if (adRepository.existsById(id)) {
             adModel.setId(id);
             return adRepository.save(adModel);

@@ -1,8 +1,8 @@
 package br.com.api.desapegai.Ad;
 import java.util.List;
-import br.com.api.desapegai.Category.CategoryModel;
-import br.com.api.desapegai.Comment.CommentModel;
-import br.com.api.desapegai.User.UserModel;
+import br.com.api.desapegai.Category.Category;
+import br.com.api.desapegai.Comment.Comment;
+import br.com.api.desapegai.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "ads")
-public class AdModel {
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,13 +22,13 @@ public class AdModel {
     private String location;
     
     @ManyToOne
-    private CategoryModel category;
+    private Category category;
     
     @OneToMany(mappedBy = "ad")
-    private List<CommentModel> comments; // Comentários relacionados ao anúncio
+    private List<Comment> comments; // Comentários relacionados ao anúncio
 
     @ManyToOne
-    private UserModel seller; // Usuário que publicou o anúncio
+    private User seller; // Usuário que publicou o anúncio
 
     @Lob
     @Basic(fetch = FetchType.LAZY)

@@ -1,26 +1,13 @@
 package br.com.api.desapegai.User;
 
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
-import java.util.ArrayList;
 
-@Service
-public class UserService {
+public interface UserService {
+    void saveUser(UserDto userDto);
 
-    private final UserRepository userRepository;
+    User findUserByEmail(String email);
 
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public List<UserModel> getAllUsers() {
-        Iterable<UserModel> usersIterable = userRepository.findAll();
-        List<UserModel> usersList = new ArrayList<>();
-        usersIterable.forEach(usersList::add);
-        return usersList;
-    }
-
-    // Implemente outros métodos de serviço, se necessário
+    List<UserDto> findAllUsers();
 }

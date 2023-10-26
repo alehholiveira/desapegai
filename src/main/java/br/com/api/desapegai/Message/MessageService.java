@@ -11,15 +11,15 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public Iterable<MessageModel> getAllMessages() {
+    public Iterable<Message> getAllMessages() {
         return messageRepository.findAll();
     }
 
-    public MessageModel getMessageById(Long id) {
+    public Message getMessageById(Long id) {
         return messageRepository.findById(id).orElse(null);
     }
 
-    public MessageModel createMessage(MessageModel message) {
+    public Message createMessage(Message message) {
         return messageRepository.save(message);
     }
 

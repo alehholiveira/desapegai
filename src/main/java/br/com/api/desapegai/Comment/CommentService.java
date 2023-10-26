@@ -12,19 +12,19 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Iterable<CommentModel> getAllComments() {
+    public Iterable<Comment> getAllComments() {
         return commentRepository.findAll();
     }
 
-    public CommentModel getCommentById(Long id) {
+    public Comment getCommentById(Long id) {
         return commentRepository.findById(id).orElse(null);
     }
 
-    public CommentModel createComment(CommentModel comment) {
+    public Comment createComment(Comment comment) {
         return commentRepository.save(comment);
     }
 
-    public CommentModel updateComment(Long id, CommentModel comment) {
+    public Comment updateComment(Long id, Comment comment) {
         if (commentRepository.existsById(id)) {
             comment.setId(id);
             return commentRepository.save(comment);

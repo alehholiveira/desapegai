@@ -15,8 +15,8 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryModel> getAllCategories() {
-        Iterable<CategoryModel> categoriesIterable = categoryRepository.findAll();
+    public List<Category> getAllCategories() {
+        Iterable<Category> categoriesIterable = categoryRepository.findAll();
         return StreamSupport.stream(categoriesIterable.spliterator(), false)
                 .collect(Collectors.toList());
     }
