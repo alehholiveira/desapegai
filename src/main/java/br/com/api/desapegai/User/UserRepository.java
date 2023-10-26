@@ -1,9 +1,8 @@
 package br.com.api.desapegai.User;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface UserRepository extends CrudRepository<UserModel, Long>{
+public interface UserRepository extends JpaRepository<User, Long>{
     
+    User findByEmail(String email);
 }
