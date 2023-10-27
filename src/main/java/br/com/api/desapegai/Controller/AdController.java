@@ -1,6 +1,9 @@
-package br.com.api.desapegai.Ad;
+package br.com.api.desapegai.Controller;
 
 import org.springframework.web.bind.annotation.*;
+
+import br.com.api.desapegai.Model.Ad;
+import br.com.api.desapegai.Service.AdService;
 
 import java.util.List;
 

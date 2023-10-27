@@ -1,6 +1,9 @@
-package br.com.api.desapegai.Comment;
+package br.com.api.desapegai.Service;
 
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Comment;
+import br.com.api.desapegai.Repository.CommentRepository;
 
 
 @Service

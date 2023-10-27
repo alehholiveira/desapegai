@@ -1,6 +1,9 @@
-package br.com.api.desapegai.Message;
+package br.com.api.desapegai.Service;
 
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Message;
+import br.com.api.desapegai.Repository.MessageRepository;
 
 @Service
 public class MessageService {

@@ -1,6 +1,4 @@
-package br.com.api.desapegai.User;
-import br.com.api.desapegai.Ad.Ad;
-
+package br.com.api.desapegai.Model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

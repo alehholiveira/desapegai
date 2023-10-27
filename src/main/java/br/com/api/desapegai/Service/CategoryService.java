@@ -1,6 +1,10 @@
-package br.com.api.desapegai.Category;
+package br.com.api.desapegai.Service;
 
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Category;
+import br.com.api.desapegai.Repository.CategoryRepository;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
