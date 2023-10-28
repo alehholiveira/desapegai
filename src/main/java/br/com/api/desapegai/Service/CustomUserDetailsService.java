@@ -1,4 +1,4 @@
-package br.com.api.desapegai.User;
+package br.com.api.desapegai.Service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,6 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Role;
+import br.com.api.desapegai.Model.User;
+import br.com.api.desapegai.Repository.UserRepository;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

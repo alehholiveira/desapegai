@@ -1,8 +1,11 @@
-package br.com.api.desapegai.Ad;
+package br.com.api.desapegai.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Ad;
+import br.com.api.desapegai.Repository.AdRepository;
 
 @Service
 public class AdService {

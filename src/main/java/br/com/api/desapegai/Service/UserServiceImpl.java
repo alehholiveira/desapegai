@@ -1,4 +1,4 @@
-package br.com.api.desapegai.User;
+package br.com.api.desapegai.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Role;
+import br.com.api.desapegai.Model.User;
+import br.com.api.desapegai.Repository.RoleRepository;
+import br.com.api.desapegai.Repository.UserRepository;
+import br.com.api.desapegai.dto.UserDto;
 
 @Service
 public class UserServiceImpl implements UserService {

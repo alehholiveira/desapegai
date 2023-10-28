@@ -1,4 +1,4 @@
-package br.com.api.desapegai.User;
+package br.com.api.desapegai.Model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

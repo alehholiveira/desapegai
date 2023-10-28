@@ -1,7 +1,10 @@
-package br.com.api.desapegai.Comment;
+package br.com.api.desapegai.Controller;
 
 
 import org.springframework.web.bind.annotation.*;
+
+import br.com.api.desapegai.Model.Comment;
+import br.com.api.desapegai.Service.CommentService;
 
 
 @RestController

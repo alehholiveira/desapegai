@@ -1,7 +1,6 @@
-package br.com.api.desapegai.Comment; 
+package br.com.api.desapegai.Model; 
 import java.util.Date;
-import br.com.api.desapegai.Ad.Ad;
-import br.com.api.desapegai.User.User; 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

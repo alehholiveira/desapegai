@@ -1,7 +1,10 @@
-package br.com.api.desapegai.Message;
+package br.com.api.desapegai.Controller;
 
 
 import org.springframework.web.bind.annotation.*;
+
+import br.com.api.desapegai.Model.Message;
+import br.com.api.desapegai.Service.MessageService;
 
 @RestController
 @RequestMapping("/messages")

@@ -1,4 +1,4 @@
-package br.com.api.desapegai.User;
+package br.com.api.desapegai.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
