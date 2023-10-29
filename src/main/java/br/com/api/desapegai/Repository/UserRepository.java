@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.api.desapegai.Model.User;
 
+
+
 public interface UserRepository extends JpaRepository<User, Long>{
     
-    User findByEmail(String email);
+   User findByEmail(String email);
 }
