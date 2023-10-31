@@ -1,6 +1,6 @@
-package br.com.api.desapegai.Message;
+package br.com.api.desapegai.Model;
 import java.util.Date;
-import br.com.api.desapegai.User.UserModel;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "messages") // Especifica o nome da tabela para MessageModel
-public class MessageModel {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,8 +17,8 @@ public class MessageModel {
     private Date sendDate;
 
     @ManyToOne
-    private UserModel sender; // Remetente da mensagem
+    private User sender; // Remetente da mensagem
 
     @ManyToOne
-    private UserModel recipient; // Destinatário da mensagem
+    private User recipient; // Destinatário da mensagem
 }
