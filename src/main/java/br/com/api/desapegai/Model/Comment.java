@@ -1,7 +1,6 @@
-package br.com.api.desapegai.Comment; 
+package br.com.api.desapegai.Model; 
 import java.util.Date;
-import br.com.api.desapegai.Ad.AdModel;
-import br.com.api.desapegai.User.UserModel; 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "comments") // Especifica o nome da tabela para CommentModel
-public class CommentModel { 
+public class Comment { 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,10 +17,10 @@ public class CommentModel {
     private Date creationDate;
 
     @ManyToOne
-    private UserModel user; 
+    private User user; 
 
     @ManyToOne
-    private AdModel ad; 
+    private Ad ad; 
 
     
 }

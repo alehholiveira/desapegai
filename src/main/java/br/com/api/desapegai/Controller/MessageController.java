@@ -1,7 +1,10 @@
-package br.com.api.desapegai.Message;
+package br.com.api.desapegai.Controller;
 
 
 import org.springframework.web.bind.annotation.*;
+
+import br.com.api.desapegai.Model.Message;
+import br.com.api.desapegai.Service.MessageService;
 
 @RestController
 @RequestMapping("/messages")
@@ -13,17 +16,17 @@ public class MessageController {
     }
 
     @GetMapping
-    public Iterable<MessageModel> getAllMessages() {
+    public Iterable<Message> getAllMessages() {
         return messageService.getAllMessages();
     }
 
     @GetMapping("/{id}")
-    public MessageModel getMessageById(@PathVariable Long id) {
+    public Message getMessageById(@PathVariable Long id) {
         return messageService.getMessageById(id);
     }
 
     @PostMapping
-    public MessageModel createMessage(@RequestBody MessageModel message) {
+    public Message createMessage(@RequestBody Message message) {
         return messageService.createMessage(message);
     }
 

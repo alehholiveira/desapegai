@@ -1,6 +1,9 @@
-package br.com.api.desapegai.Message;
+package br.com.api.desapegai.Service;
 
 import org.springframework.stereotype.Service;
+
+import br.com.api.desapegai.Model.Message;
+import br.com.api.desapegai.Repository.MessageRepository;
 
 @Service
 public class MessageService {
@@ -11,15 +14,15 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public Iterable<MessageModel> getAllMessages() {
+    public Iterable<Message> getAllMessages() {
         return messageRepository.findAll();
     }
 
-    public MessageModel getMessageById(Long id) {
+    public Message getMessageById(Long id) {
         return messageRepository.findById(id).orElse(null);
     }
 
-    public MessageModel createMessage(MessageModel message) {
+    public Message createMessage(Message message) {
         return messageRepository.save(message);
     }
 
