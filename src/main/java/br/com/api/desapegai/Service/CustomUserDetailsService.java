@@ -31,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                     user.getPassword(),
                     mapRolesToAuthorities(user.getRoles()));
         }else{
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Email ou senha inválidos.");
         }
     }
 
@@ -41,4 +41,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());
         return mapRoles;
     }
+
+
+
+    
 }
