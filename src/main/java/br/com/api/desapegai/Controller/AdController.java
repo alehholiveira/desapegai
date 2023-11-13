@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import br.com.api.desapegai.Model.Ad;
+import br.com.api.desapegai.Model.User;
 import br.com.api.desapegai.Service.AdService;
 
 
@@ -20,6 +21,14 @@ public class AdController {
         this.adService = adService;
     }
 
+    @GetMapping("/novo_anuncio")
+    public String showRegistrationForm(Model model){
+        // create model object to store form data
+        Ad ad= new Ad();
+        model.addAttribute("ad", ad);
+        return "create_ad";
+    }
+
     @GetMapping
     public String getAllAds(Model model) {
         List<Ad> ads = adService.getAllAds();
@@ -34,13 +43,11 @@ public class AdController {
         return "ad-details"; // Renderiza uma página HTML com os detalhes do anúncio
     }
 
-    @GetMapping("/create")
-    public String showAdCreationForm(Model model) {
-        model.addAttribute("ad", new Ad());
-        return "ad-creation"; // Renderiza uma página HTML para criar um anúncio
-    }
 
-    @PostMapping("/create")
+
+
+
+    @PostMapping("/novo_anuncio/save")
 public String createAd(@ModelAttribute Ad ad, @RequestParam Long userId) {
     adService.createAd(ad, userId);
     return "redirect:/anuncios"; // Redireciona para a lista de anúncios após a criação

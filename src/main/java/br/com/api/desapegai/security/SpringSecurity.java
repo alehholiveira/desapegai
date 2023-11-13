@@ -34,6 +34,9 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->{
                         authorize.requestMatchers("/register/**").permitAll();
                         authorize.requestMatchers("/").permitAll();
+                        authorize.requestMatchers("/index").permitAll();
+                        authorize.requestMatchers("/images/**").permitAll();
+                        authorize.requestMatchers("/css/**").permitAll();
                         authorize.anyRequest().authenticated();
                         
                                 
@@ -41,7 +44,7 @@ public class SpringSecurity {
                 form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/users")
+                        .defaultSuccessUrl("/")
                         .permitAll()
         ).logout(
                 logout -> logout
