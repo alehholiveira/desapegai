@@ -1,14 +1,16 @@
 package br.com.api.desapegai.security;
 
-import java.util.ArrayList;
+
+import java.util.Collection;
 import java.util.List;
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
 import br.com.api.desapegai.Model.Ad;
-import br.com.api.desapegai.Model.Role;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UserSpringSecurity implements UserDetails{
 
-    private Long id;
+    private long id;
     private String name;
     private String username;
     private String email;
@@ -24,15 +26,27 @@ public class UserSpringSecurity implements UserDetails{
     private String address;
     private String phone;
     private List<Ad> ads; // Anúncios publicados pelo usuário
-    private List<Role> roles = new ArrayList<>();
+    Collection<? extends GrantedAuthority> role;
 
 
     
 
+    public UserSpringSecurity(long new_id, String new_name, String new_username, String new_email,
+     String new_password, String new_address, String new_phone, List<Ad> new_ads,Collection<? extends GrantedAuthority> new_role){
+        this.id = new_id;
+        this.name = new_name;
+        this.username = new_username;
+        this.email = new_email;
+        this.password = new_password;
+        this.address = new_address;
+        this.phone = new_phone;
+        this.ads = new_ads;
+        this.role = new_role;
+    }
+
     @Override
-    public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.role;
     }
 
 
