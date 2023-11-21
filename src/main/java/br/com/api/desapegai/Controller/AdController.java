@@ -4,8 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import br.com.api.desapegai.Model.Ad;
+import br.com.api.desapegai.Model.Category;
 import br.com.api.desapegai.Service.AdService;
-
+import br.com.api.desapegai.Service.CategoryService;
 
 import java.util.List;
 
@@ -14,10 +15,23 @@ import java.util.List;
 public class AdController {
 
     private final AdService adService;
+
+    private final CategoryService categoryService;
     
 
-    public AdController(AdService adService) {
+    public AdController(AdService adService, CategoryService categoryService) {
         this.adService = adService;
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping("/novo_anuncio")
+    public String showRegistrationForm(Model model){
+        // create model object to store form data
+        List<Category> categories = categoryService.getAllCategories(); // Supondo que você tenha um serviço para obter todas as categorias
+        Ad ad= new Ad();
+        model.addAttribute("ad", ad);
+        model.addAttribute("categories", categories);
+        return "create_ad";
     }
 
     @GetMapping
@@ -34,13 +48,11 @@ public class AdController {
         return "ad-details"; // Renderiza uma página HTML com os detalhes do anúncio
     }
 
-    @GetMapping("/create")
-    public String showAdCreationForm(Model model) {
-        model.addAttribute("ad", new Ad());
-        return "ad-creation"; // Renderiza uma página HTML para criar um anúncio
-    }
 
-    @PostMapping("/create")
+
+
+
+    @PostMapping("/novo_anuncio/save")
 public String createAd(@ModelAttribute Ad ad, @RequestParam Long userId) {
     adService.createAd(ad, userId);
     return "redirect:/anuncios"; // Redireciona para a lista de anúncios após a criação

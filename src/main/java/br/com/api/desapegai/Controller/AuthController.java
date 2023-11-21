@@ -25,16 +25,25 @@ public class AuthController {
     }
 
     // handler method to handle home page request
-    @GetMapping("/index")
+    @GetMapping("/")
     public String home(){
+
         return "index";
     }
+
+ 
 
     // handler method to handle login request
     @GetMapping("/login")
     public String login(){
         return "login";
     }
+
+    @GetMapping("/login-success")
+    public String loginSuccess() {
+        return "redirect:/";
+    }
+
 
     // handler method to handle user registration form request
     @GetMapping("/register")
@@ -54,7 +63,7 @@ public class AuthController {
         
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
+                    "Já existe uma conta com esse email");
                     
         }
 
@@ -75,6 +84,7 @@ public class AuthController {
         model.addAttribute("users", users);
         return "users";
     }
+
 
     
 }
