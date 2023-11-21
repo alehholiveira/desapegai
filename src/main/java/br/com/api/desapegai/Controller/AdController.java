@@ -53,9 +53,17 @@ public class AdController {
 
 
     @PostMapping("/novo_anuncio/save")
-public String createAd(@ModelAttribute Ad ad, @RequestParam Long userId) {
-    adService.createAd(ad, userId);
-    return "redirect:/anuncios"; // Redireciona para a lista de anúncios após a criação
-}
+    public String createAd(@ModelAttribute Ad ad, @RequestParam Long userId, Model model) {
+        try {
+            adService.createAd(ad, userId);
+            return "redirect:/anuncios";
+        } catch (Exception e) {
+            model.addAttribute("error", "Ocorreu um erro ao criar o anúncio: " + e.getMessage());
+
+            return "redirect:/anuncios/novo_anuncio"; 
+            // criar uma pagina para quando se da um erro de criacao de anuncio
+        }
+    }
+    
 
 }
