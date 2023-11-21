@@ -27,6 +27,7 @@ public class AuthController {
     // handler method to handle home page request
     @GetMapping("/")
     public String home(){
+
         return "index";
     }
 
@@ -37,6 +38,12 @@ public class AuthController {
     public String login(){
         return "login";
     }
+
+    @GetMapping("/login-success")
+    public String loginSuccess() {
+        return "redirect:/";
+    }
+
 
     // handler method to handle user registration form request
     @GetMapping("/register")
