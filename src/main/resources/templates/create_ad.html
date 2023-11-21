@@ -41,6 +41,7 @@
                                 th:field="*{price}" />
                             <p th:errors="*{price}" class="text-danger" th:if="${#fields.hasErrors('price')}"></p>
                         </div>
+                        <input type="hidden" name="userId" th:value="${#authentication.principal.id}" />
                         <div class="form-group text-center">
                             <button class="btn btn-primary ps-5 pe-5 mb-1" type="submit">Criar</button>
                         </div>
