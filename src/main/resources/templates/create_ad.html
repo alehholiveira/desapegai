@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" th:action="@{/anuncios/novo_anuncio/save}" th:object="${ad}">
+                    <form method="post" th:action="@{/anuncios/novo_anuncio/save}" th:object="${ad}" onsubmit="return validateForm()">
                         <div class="form-group mb-3">
                             <label class="form-label">Título</label>
                             <input class="form-control" id="title" name="title" th:field="*{title}" />
@@ -47,7 +47,7 @@
                             </select>
                         </div>
                         <div class="form-group text-center">
-                            <button class="btn btn-primary ps-5 pe-5 mb-1" type="submit">Criar</button>
+                            <button id="submitBtn" class="btn btn-primary ps-5 pe-5 mb-1" type="submit" disabled>Criar</button>
                         </div>
                     </form>
                 </div>
@@ -59,13 +59,53 @@
         integrity="sha384-MfZyZ1OXnGCKJv3/JBfQckuP7rfrJpOVHjq8b8f+0Cj0A0bQswe5CkXZ2MI8jM2"
         crossorigin="anonymous"></script>
 
-    <script>
-        function changeCategory(selectElement) {
-            let categoryIdInput = document.getElementById("category_input");
-            categoryIdInput.value = selectElement.value;
-        }
-    </script>
+        <script>
+            function changeCategory(selectElement) {
+                let categoryIdInput = document.getElementById("category_input");
+                categoryIdInput.value = selectElement.value;
+            }
+        
+            function replaceCommaWithDot(element) {
+                element.value = element.value.replace(",", ".");
+            }
+        
+            function validateForm() {
+                let title = document.getElementById("title").value;
+                let description = document.getElementById("description").value;
+                let price = document.getElementById("price").value;
+        
+                // Verificar se os campos estão preenchidos
+                if (title === "" || description === "" || price === "") {
+                    alert("Por favor, preencha todos os campos corretamente.");
+                    return false;
+                }
+        
+                // Verificar o tipo de dado do campo 'price'
+                if (typeof parseFloat(price) !== 'number' || isNaN(parseFloat(price))) {
+                    alert("O campo 'Preço' deve ser um número válido.");
+                    return false;
+                }
+        
+                return true;
+            }
+        
+            document.addEventListener("input", function () {
+                let title = document.getElementById("title").value;
+                let description = document.getElementById("description").value;
+                let price = document.getElementById("price");
+        
+                replaceCommaWithDot(price);
+        
+                let submitBtn = document.getElementById("submitBtn");
+                submitBtn.disabled = title === "" || description === "" || price.value === "";
+            });
+        
+            document.addEventListener("blur", function (event) {
+                if (event.target.id === "price") {
+                    replaceCommaWithDot(event.target);
+                }
+            }, true);
+        </script>
 </body>
 
 </html>
-<!-- arrumar negocio para nao ter categoria, enviar o id 0 -->

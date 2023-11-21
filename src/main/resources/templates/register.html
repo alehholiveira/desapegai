@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" th:action="@{/register/save}" th:object="${user}">
+                    <form method="post" th:action="@{/register/save}" th:object="${user}" onsubmit="return validateForm()">
                         <div class="form-group mb-3">
                             <label class="form-label">Email</label>
                             <input class="form-control" id="email" name="email" th:field="*{email}" type="email" />
@@ -161,6 +161,60 @@
                     }
                 }
             </script>
+
+<script>
+    function replaceCommaWithDot(element) {
+        element.value = element.value.replace(",", ".");
+    }
+
+    function validateForm() {
+        let title = document.getElementById("title").value;
+        let description = document.getElementById("description").value;
+        let price = document.getElementById("price").value;
+        let category = document.getElementById("category").value;
+        let phone = document.getElementById("phone").value;
+
+        // Verificar se os campos estão preenchidos
+        if (title === "" || description === "" || price === "" || category === "" || phone === "") {
+            alert("Por favor, preencha todos os campos corretamente.");
+            return false;
+        }
+
+        // Substituir vírgulas por pontos no campo 'price'
+        replaceCommaWithDot(document.getElementById("price"));
+
+        // Validar telefone
+        if (!validateTelefone(phone)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function validateTelefone(telefone) {
+        // Expressão regular para aceitar apenas dígitos
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(telefone)) {
+            alert("Número de telefone inválido! Por favor, insira apenas números.");
+            document.getElementById('phone').value = "";  // Limpa o campo se for inválido
+            return false;
+        }
+
+        return true;
+    }
+
+    document.addEventListener("input", function () {
+        let price = document.getElementById("price");
+        let phone = document.getElementById("phone");
+
+        replaceCommaWithDot(price);
+
+        let submitBtn = document.querySelector("button[type=submit]");
+        submitBtn.disabled = !validateForm();
+    });
+</script>
+
 </body>
 
 </html>
