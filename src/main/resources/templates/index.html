@@ -13,13 +13,13 @@
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="https://placehold.co/800x175/red/white"  class="d-block carrousel_img w-100" alt="...">
+                    <img th:src="@{/images/1.png}"  class="d-block carrousel_img w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://placehold.co/800x175/orange/white"  class="d-block carrousel_img w-100" alt="...">
+                    <img th:src="@{/images/2.png}"  class="d-block carrousel_img w-100" alt="...">
                   </div>
                   <div class="carousel-item">
-                    <img src="https://placehold.co/800x175/blue/white"  class="d-block carrousel_img w-100" alt="...">
+                    <img th:src="@{/images/3.png}"  class="d-block carrousel_img w-100" alt="...">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -39,10 +39,10 @@
         <img th:src="@{/images/logo.png}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">
-              <p>Preço: R$ <span th:text="${ad.price}"></span></p>
+              <p>R$ <span th:text="${ad.price}"></span></p>
             </h5>
             <p th:text="${ad.description}"></p>
-            <p class="card-text" th:text="${ad.seller.address}"></p>
+            <p class="card-text" th:text="${ad.seller.address}"></p>   
             <p class="card-text" th:text="${ad.publicationDate}"></p>
             <a th:href="'/' + ${ad.id}" class="btn btn-primary">Ver mais</a>
         </div>
@@ -52,4 +52,59 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+
+  function meu_callback(conteudo) {
+    if (!("erro" in conteudo)) {
+        //Atualiza os campos com os valores.
+        var endereco = 'Cidade: ' + conteudo.localidade;
+        document.getElementById('endereco').innerHTML = endereco;
+    }
+    else {
+        //CEP não Encontrado.
+        alert("CEP não encontrado.");
+    }
+  }
+
+      
+  function pesquisacep(valor) {
+
+      //Nova variável "cep" somente com dígitos.
+      var cep = valor.replace(/\D/g, '');
+
+      //Verifica se campo cep possui valor informado.
+      if (cep != "") {
+
+          //Expressão regular para validar o CEP.
+          var validacep = /^[0-9]{8}$/;
+
+          //Valida o formato do CEP.
+          if(validacep.test(cep)) {
+
+              //Cria um elemento javascript.
+              var script = document.createElement('script');
+
+              //Sincroniza com o callback.
+              script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+              //Insere script no documento e carrega o conteúdo.
+              document.body.appendChild(script);
+
+          } //end if.
+          else {
+              //cep é inválido.
+              limpa_formulário_cep();
+              alert("Formato de CEP inválido.");
+          }
+      } //end if.
+      else {
+          //cep sem valor, limpa formulário.
+          limpa_formulário_cep();
+      }
+  };
+
+  </script>
+
 </html>
