@@ -36,12 +36,14 @@
 
     <h2 class="ms-5 ps-5 mb-3">Produtos:</h2>
     <div th:each="ad : ${ads}" class="card ms-5 ps-5 mt-2" style="width: 18rem;">
-        <img th:src="${#strings.replace(ad.images, ',', '')}" class="card-img-top" alt="...">
+        <img th:src="@{/images/logo.png}" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title" th:text="${ad.title}"></h5>
-            <p class="card-text" th:text="${ad.price}"></p>
-            <p class="card-text" th:text="${ad.seller.name}"></p>
+            <h5 class="card-title">
+              <p>Preço: R$ <span th:text="${ad.price}"></span></p>
+            </h5>
             <p th:text="${ad.description}"></p>
+            <p class="card-text" th:text="${ad.seller.address}"></p>
+            <p class="card-text" th:text="${ad.publicationDate}"></p>
             <a th:href="'/' + ${ad.id}" class="btn btn-primary">Ver mais</a>
         </div>
     </div>
