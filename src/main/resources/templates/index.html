@@ -35,14 +35,14 @@
     </div>
 
     <h2 class="ms-5 ps-5 mb-3">Produtos:</h2>
-    <div th:each="ad : ${ads}" class="card ms-5 ps-5 mt-2" style="width: 18rem;">
+    <div th:each="ad, iterStat : ${ads}" class="card ms-5 ps-5 mt-2" style="width: 18rem;">
         <img th:src="@{/images/logo.png}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">
               <p>R$ <span th:text="${ad.price}"></span></p>
             </h5>
             <p th:text="${ad.description}"></p>
-            <p class="card-text" th:text="${ad.seller.address}"></p>   
+            <p  th:id="${iterStat.index}" class="card-text" th:text="${ad.seller.address}" onload="carrega_cep(this.id)"></p>   
             <p class="card-text" th:text="${ad.publicationDate}"></p>
             <a th:href="'/' + ${ad.id}" class="btn btn-primary">Ver mais</a>
         </div>
@@ -55,12 +55,33 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
+  var id = 0;
+  carrega_cep();
 
+  function carrega_cep(){
+    var conteudo_final;
+    let cep  = document.getElementById(0); 
+    let id_local  = 0;
+    var conteudo_final;
+    while(cep != null){
+      console.log(id_local);
+      console.log('cdgfkcdsg');
+      pesquisacep(cep.innerText);
+      id_local++;
+      cep = document.getElementById(id_local);
+    }
+  }
+ 
   function meu_callback(conteudo) {
     if (!("erro" in conteudo)) {
         //Atualiza os campos com os valores.
-        var endereco = 'Cidade: ' + conteudo.localidade;
-        document.getElementById('endereco').innerHTML = endereco;
+
+        let endereco =  conteudo.localidade + " - " + conteudo.uf;
+      document.getElementById(id).innerText = endereco;
+      document.getElementById(id).style.display = "block";
+      id++;
+        
+      
     }
     else {
         //CEP não Encontrado.
@@ -89,8 +110,13 @@
               //Sincroniza com o callback.
               script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
 
+              
+  
               //Insere script no documento e carrega o conteúdo.
               document.body.appendChild(script);
+              
+              
+              
 
           } //end if.
           else {
