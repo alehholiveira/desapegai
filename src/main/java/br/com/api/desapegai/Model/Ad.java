@@ -30,10 +30,10 @@ public class Ad {
     @ManyToOne
     private User seller; // Usuário que publicou o anúncio
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] images; // Imagens relacionadas ao anúncio
+    @Column(nullable = false)
+    private String photos;
 
     private Date publicationDate;
     private String status; // Ativo, expirado, vendido, etc.
+
 }

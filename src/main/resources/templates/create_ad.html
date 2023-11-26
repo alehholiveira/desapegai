@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" th:action="@{/anuncios/novo_anuncio/save}" th:object="${ad}" onsubmit="return validateForm()">
+                    <form method="post" enctype="multipart/form-data" th:action="@{/anuncios/novo_anuncio/save}" th:object="${ad}">
                         <div class="form-group mb-3">
                             <label class="form-label">Título</label>
                             <input class="form-control" id="title" name="title" th:field="*{title}" />
@@ -35,6 +35,10 @@
                         <div class="form-group mb-3">
                             <label class="form-label">Preço</label>
                             <input class="form-control" id="price" name="price" th:field="*{price}" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Imagem do produto</label>
+                            <input type="file" name="image" accept="image/png, image/jpeg" />
                             <p th:errors="*{price}" class="text-danger" th:if="${#fields.hasErrors('price')}"></p>
                         </div>
                         <input type="hidden" name="userId" th:value="${#authentication.principal.id}" />

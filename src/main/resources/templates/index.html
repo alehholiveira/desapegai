@@ -36,7 +36,8 @@
 
     <h2 class="ms-5 ps-5 mb-3">Produtos:</h2>
     <div th:each="ad, iterStat : ${ads}" class="card ms-5 ps-5 mt-2" style="width: 18rem;">
-        <img th:src="@{/images/logo.png}" class="card-img-top" alt="...">
+        <img th:src="@{/ad-images/{id}/{photos}(id=${ad.id}, photos=${ad.photos})}" class="card-img-top" alt="...">
+
         <div class="card-body">
             <h5 class="card-title">
               <p>R$ <span th:text="${ad.price}"></span></p>

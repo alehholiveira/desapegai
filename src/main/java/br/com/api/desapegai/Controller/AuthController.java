@@ -36,7 +36,7 @@ public class AuthController {
 
     @GetMapping("/login-success")
     public String loginSuccess() {
-        return "redirect:";
+        return "redirect:/";
     }
 
 
