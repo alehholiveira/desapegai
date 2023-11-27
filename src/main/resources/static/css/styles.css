@@ -1,3 +1,4 @@
+/* nav bar css */
 #neubar {
     background: #fae8d2;
     box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
@@ -21,8 +22,42 @@
     padding-right:12px;
   }
   #neubar .dropdown-menu {
-    background : #545454
+    background : #f5d7b2
   }
   a.navbar-brand {
     color: #454545
   }
+
+/* card css */
+  .card-body{
+    background-color: #392E26;
+    border-color: #ddc1a0;
+  }
+
+  .card-text{
+    color: rgb(211, 203, 203);
+  }
+
+  #preco{
+    color: white;
+  }
+
+  #produtos{
+    color: white;
+  }
+
+  #botao{
+    background: #f5d7b2;
+    color: #392E26;
+    border-color: #ddc1a0;
+  }
+
+  #botao:hover{
+    background-color: white;
+  }
+  
+  body {
+    background-color: #3E3E3E;
+    transition: background-color 1.5s ease;
+}
+

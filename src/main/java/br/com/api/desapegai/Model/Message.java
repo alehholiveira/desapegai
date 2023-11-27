@@ -17,8 +17,10 @@ public class Message {
     private Date sendDate;
 
     @ManyToOne
+    @JoinColumn(name = "sender_id")
     private User sender; // Remetente da mensagem
 
     @ManyToOne
+    @JoinColumn(name = "receiver_id")
     private User recipient; // Destinatário da mensagem
 }

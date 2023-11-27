@@ -1,5 +1,4 @@
 package br.com.api.desapegai.Model;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,8 +23,6 @@ public class Ad {
     @ManyToOne
     private Category category;
     
-    @OneToMany(mappedBy = "ad")
-    private List<Comment> comments; // Comentários relacionados ao anúncio
 
     @ManyToOne
     private User seller; // Usuário que publicou o anúncio
