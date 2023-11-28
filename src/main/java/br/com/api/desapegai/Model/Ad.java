@@ -1,5 +1,4 @@
 package br.com.api.desapegai.Model;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,16 +23,14 @@ public class Ad {
     @ManyToOne
     private Category category;
     
-    @OneToMany(mappedBy = "ad")
-    private List<Comment> comments; // Comentários relacionados ao anúncio
 
     @ManyToOne
     private User seller; // Usuário que publicou o anúncio
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] images; // Imagens relacionadas ao anúncio
+    @Column(nullable = false)
+    private String photos;
 
     private Date publicationDate;
     private String status; // Ativo, expirado, vendido, etc.
+
 }

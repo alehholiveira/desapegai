@@ -18,42 +18,42 @@
 
 
 <body>
-    <nav th:fragment="html_nav" style="border-bottom: 1px solid rgba(0, 0, 0, 0.205);;"  class="navbar navbar-expand-lg bg-body-tertiary ">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">
-            <img class="logo" th:src="@{/images/logo.png}"/>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <form class="d-flex mx-4" role="search">
-                <input class="form-control me-2" type="search" placeholder="Procure Produtos" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
-              </form>
-            <ul class="navbar-nav ms-auto my-2 my-lg-0 mx-4 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                  <a class="nav-link" href="" th:href="@{/register}">Cadastrar</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                  <a class="nav-link" href="@{/login}">Entrar</a>
-                </li>
-
-              <li sec:authorize="isAuthenticated()" class="nav-item dropdown" style="margin-right: 100px;">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.username">    
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Ver perfil</a></li>
-                  <li><a class="dropdown-item" th:href="@{/anuncios/novo_anuncio}">Criar anúncio</a></li>
-                  <li><a class="dropdown-item" th:href="@{/logout}">Sair</a></li>
-                </ul>
-              </li>
-
+  <nav th:fragment="html_nav" class="navbar navbar-expand-sm navbar-light" id="neubar">
+    <div class="container">
+      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/logo.png}" height="60"/></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto ">
+          <li class="nav-item">
+            <a class="nav-link mx-2 active" aria-current="page" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" th:href=@{/anuncios/novo_anuncio}>Desapegar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="/sobre">Sobre</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link mx-2" href="" th:href="@{/register}">Cadastrar</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link mx-2" href="@{/login}">Entrar</a>
+          </li>
+          <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.username"></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+              <li><a class="dropdown-item" th:href="@{/logout}">Sair</a></li>
             </ul>
-            
-          </div>
-        </div>
-      </nav>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </body>
 
 </html>
+

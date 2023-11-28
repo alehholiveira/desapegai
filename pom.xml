@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.1.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.api</groupId>
@@ -33,7 +33,6 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
-			<version>3.1.2.RELEASE</version>
 		</dependency>
 			<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,9 +74,15 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
+		
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.23</version> <!-- Use a versão adequada do driver MySQL -->
+</dependency>
+<dependency>
+    <groupId>com.google.maps</groupId>
+    <artifactId>google-maps-services</artifactId>
+    <version>0.17.0</version>
 </dependency>
 
 	</dependencies>
