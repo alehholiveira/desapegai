@@ -74,9 +74,15 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
+		
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.23</version> <!-- Use a versão adequada do driver MySQL -->
+</dependency>
+<dependency>
+    <groupId>com.google.maps</groupId>
+    <artifactId>google-maps-services</artifactId>
+    <version>0.17.0</version>
 </dependency>
 
 	</dependencies>
