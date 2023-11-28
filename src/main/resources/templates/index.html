@@ -36,12 +36,12 @@
 
 
     <h2 class="ms-5 ps-5 mb-3" id="produtos">Produtos:</h2>
-    <div class="d-flex flex-wrap ms-5 ps-5">
+    <div class="d-flex flex-wrap ms-5 ps-5" id="card-css">
     <div th:each="ad, iterStat : ${ads}" class="card ms-5  mt-2" style="width: 18rem;">
         <img th:src="@{/ad-images/{id}/{photos}(id=${ad.id}, photos=${ad.photos})}" class="card-img-top" alt="...">
 
         <div class="card-body">
-          <h5 class="card-title" id="preco">
+          <h5 class="card-title">
             <p>R$ <span th:text="${ad.price}"></span></p>
           </h5>
           <p class="card-text" th:text="${ad.description}"></p>
@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div id="mapa" style="height: 400px;"></div>
+    <div id="mapa" style="height: 400px; width: 300px; "></div>
       
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -72,7 +72,6 @@
     var conteudo_final;
     while(cep != null){
       console.log(id_local);
-      console.log('cdgfkcdsg');
       pesquisacep(cep.innerText);
       id_local++;
       cep = document.getElementById(id_local);

@@ -28,22 +28,42 @@
     color: #454545
   }
 
-/* card css */
+  /* card css */
+  #card-css .card {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione uma sombra para destacar o card */
+    margin: 15px; /* Adicione margem ao redor do card para espaçamento */
+  }
+
+  #card-css .card-img-top {
+    width: 100%;
+    height: 300px; /* Substitua 200px pela altura desejada */
+    object-fit: cover; /* Mantém a proporção da imagem e cobre toda a altura especificada */
+    border-bottom: 1px solid #ccc;
+  }
+
   .card-body{
-    background-color: #392E26;
+    background-color: #f5d7b2;
     border-color: #ddc1a0;
   }
 
   .card-text{
-    color: rgb(211, 203, 203);
+    color: black;
   }
 
-  #preco{
-    color: white;
+  .card-title{
+    color: black;
+    font-weight: bold; /* Adicione negrito, se desejar */
+    margin-bottom: 10px; /* Adicione margem inferior para espaçamento */
   }
 
   #produtos{
-    color: white;
+    color: black;
+    font-weight: bold; /* Adicione negrito, se desejar */
+    margin-bottom: 10px; /* Adicione margem inferior para espaçamento */
   }
 
   #botao{
@@ -55,9 +75,11 @@
   #botao:hover{
     background-color: white;
   }
-  
+
+
+  /* caracteristicas fundo da pagina */
   body {
-    background-color: #3E3E3E;
+    background-color: #f3ebe0;
     transition: background-color 1.5s ease;
 }
 
