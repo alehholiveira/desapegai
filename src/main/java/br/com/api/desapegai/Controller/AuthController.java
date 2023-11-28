@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import br.com.api.desapegai.Model.Ad;
 import br.com.api.desapegai.Model.User;
+import br.com.api.desapegai.Service.AdService;
 import br.com.api.desapegai.Service.UserService;
 import jakarta.validation.Valid;
 
@@ -19,15 +21,11 @@ import java.util.List;
 @Controller
 public class AuthController {
     private UserService userService;
+    private AdService adService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, AdService adService) {
         this.userService = userService;
-    }
-
-    // handler method to handle home page request
-    @GetMapping("/index")
-    public String home(){
-        return "index";
+        this.adService = adService;
     }
 
     // handler method to handle login request
@@ -35,6 +33,12 @@ public class AuthController {
     public String login(){
         return "login";
     }
+
+    @GetMapping("/login-success")
+    public String loginSuccess() {
+        return "redirect:/";
+    }
+
 
     // handler method to handle user registration form request
     @GetMapping("/register")
@@ -54,7 +58,7 @@ public class AuthController {
         
         if(existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()){
             result.rejectValue("email", null,
-                    "There is already an account registered with the same email");
+                    "Já existe uma conta com esse email");
                     
         }
 
@@ -75,6 +79,15 @@ public class AuthController {
         model.addAttribute("users", users);
         return "users";
     }
+
+        // handler method to handle home page request
+    @GetMapping("/")
+    public String home(Model model){
+        List<Ad> ads = adService.getAllAds();
+        model.addAttribute("ads", ads);
+        return "index";
+    }
+
 
     
 }

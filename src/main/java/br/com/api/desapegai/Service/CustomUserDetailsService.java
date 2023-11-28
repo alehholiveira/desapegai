@@ -27,11 +27,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                    user.getPassword(),
+            return new br.com.api.desapegai.security.UserSpringSecurity(user.getId(),user.getName(),
+            user.getUsername(),user.getEmail(),user.getPassword(),user.getAddress(),user.getPhone(),
+            user.getAds(), 
                     mapRolesToAuthorities(user.getRoles()));
         }else{
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("Email ou senha inválidos.");
         }
     }
 
@@ -41,4 +42,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toList());
         return mapRoles;
     }
+
+
+
+    
 }
