@@ -15,18 +15,125 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Anúncio</h5>
-                    <p class="card-text">Aqui vai o conteúdo do seu anúncio.</p>
+                    <div class="d-flex flex-wrap ms-5 ps-5" id="card-css">
+                        <div class="card ms-5  mt-2" style="width: 18rem;">
+                            <img th:src="@{/ad-images/{id}/{photos}(id=${ad.id}, photos=${ad.photos})}" class="card-img-top" alt="...">
+                    
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                <p>R$ <span th:text="${ad.price}"></span></p>
+                              </h5>
+                              <p class="card-text" th:text="${ad.description}"></p>
+                              <p id="address" class="card-text" th:text="${ad.seller.address}" onload="carrega_cep(this.id)"></p>   
+                              <p class="card-text"><small class ="text-muted"> Publicado em: <span th:text="${#dates.format(ad.publicationDate, 'dd/MM/yyyy HH:mm')}"></span></small></p>
+                            </div>
+                          </div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div id="mapa" style="height: 400px; width: 800px; "></div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Script CEP para exibir no anuncio -->
+<script>
+var id_local = "address";
+carrega_cep();
+function carrega_cep() {
+    // Obtenha o elemento pelo ID
+    let cep = document.getElementById(id_local);
+
+    if (cep) {
+        pesquisacep(cep.innerText);
+    } else {
+        console.error("Elemento não encontrado com ID: " + id_local);
+    }
+}
+
+function meu_callback(conteudo) {
+    if (!("erro" in conteudo)) {
+        //Atualiza os campos com os valores.
+
+      let endereco =  conteudo.localidade + " - " + conteudo.uf;
+      document.getElementById(id_local).innerText = endereco;
+      document.getElementById(id_local).style.display = "block";
+    }
+    else {
+        //CEP não Encontrado.
+        alert("CEP não encontrado.");
+    }
+  }
+
+function pesquisacep(valor) {
+    // Nova variável "cep" somente com dígitos.
+    var cep = valor.replace(/\D/g, '');
+
+    // Verifica se campo cep possui valor informado.
+    if (cep != "") {
+        // Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+
+        // Valida o formato do CEP.
+        if (validacep.test(cep)) {
+            // Cria um elemento javascript.
+            var script = document.createElement('script');
+
+            // Sincroniza com o callback.
+            script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+            // Insere script no documento e carrega o conteúdo.
+            document.body.appendChild(script);
+        } else {
+            // CEP é inválido.
+            limpa_formulário_cep();
+            alert("Formato de CEP inválido.");
+        }
+    } else {
+        // CEP sem valor, limpa formulário.
+        limpa_formulário_cep();
+    }
+}
+  
+  </script>
+  
+  <!-- Script API Google Maps -->
+  <script th:if="${#authorization.expression('isAuthenticated()')}" th:inline="javascript">
+    async function getCoordinates(address) {
+      const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAc9-NedwVuG0a_UWAysE5NRK3c7ApeNgQ`);
+      const data = await response.json();
+      return data.results[0].geometry.location;
+    }
+  
+    async function inicializarMapa() {
+      // Obtenha as coordenadas usando a função getCoordinates
+      var address = /*[[${#authentication.principal.address}]]*/ '';
+      const pontoEncontro = await getCoordinates(address);
+      console.log(pontoEncontro);
+  
+      // Crie um objeto de opções para o mapa
+      var opcoesMapa = {
+        center: pontoEncontro,
+        zoom: 12
+      };
+  
+      // Crie um novo mapa no elemento com o ID "mapa"
+      var mapa = new google.maps.Map(document.getElementById('mapa'), opcoesMapa);
+  
+      // Adicione um marcador no ponto de encontro
+      var marcador = new google.maps.Marker({
+        position: pontoEncontro,
+        map: mapa,
+        title: 'Ponto de Encontro'
+      });
+    }
+  </script>
 
 </body>
 </html>
