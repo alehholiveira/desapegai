@@ -83,7 +83,7 @@ public class AdController {
             }
              
             adService.createAd(ad, userId);
-            return "redirect:/anuncios";
+            return "redirect:/";
         } catch (Exception e) {
             model.addAttribute("error", "Ocorreu um erro ao criar o anúncio: " + e.getMessage());
 

@@ -32,6 +32,9 @@
                   <p id="address" class="card-text" th:text="${ad.seller.address}" onload="carrega_cep(this.id)"></p>
                   <p class="card-text"><small class="text-muted"> Publicado em: <span
                         th:text="${#dates.format(ad.publicationDate, 'dd/MM/yyyy HH:mm')}"></span></small></p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" sec:authorize="isAuthenticated()">
+                            Ver localização média
+                    </button>
                 </div>
               </div>
             </div>
@@ -40,7 +43,34 @@
       </div>
     </div>
   </div>
-  <div id="mapa" style="height: 400px; width: 800px; "></div>
+  
+
+
+  
+
+  <div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Localização média entre o anunciante</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div id="mapa" style="height: 400px; width: 760px; "></div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -138,9 +168,7 @@
     async function inicializarMapa() {
       var address1 = /*[[${#authentication.principal.address}]]*/ '';
       var address2 = /*[[${ad.seller.address}]]*/ '';
-      console.log(address2)
       const pontoEncontro = await getMidPointCoordinates(address1, address2);
-      console.log(pontoEncontro);
 
       //  Objeto de opções para o mapa
       var opcoesMapa = {
@@ -158,6 +186,9 @@
         title: 'Ponto de Encontro'
       });
     }
+
+
+
   </script>
 
 </body>
