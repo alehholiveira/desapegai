@@ -51,13 +51,11 @@
         </div>
       </div>
     </div>
-    <div id="mapa" style="height: 400px; width: 800px; "></div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc9-NedwVuG0a_UWAysE5NRK3c7ApeNgQ&callback=inicializarMapa" async defer></script>
 
 <!-- Script CEP para exibir no anuncio -->
 <script>
@@ -132,38 +130,5 @@
   };
 
 </script>
-
-<!-- Script API Google Maps -->
-<script th:if="${#authorization.expression('isAuthenticated()')}" th:inline="javascript">
-  async function getCoordinates(address) {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyAc9-NedwVuG0a_UWAysE5NRK3c7ApeNgQ`);
-    const data = await response.json();
-    return data.results[0].geometry.location;
-  }
-
-  async function inicializarMapa() {
-    // Obtenha as coordenadas usando a função getCoordinates
-    var address = /*[[${#authentication.principal.address}]]*/ '';
-    const pontoEncontro = await getCoordinates(address);
-    console.log(pontoEncontro);
-
-    // Crie um objeto de opções para o mapa
-    var opcoesMapa = {
-      center: pontoEncontro,
-      zoom: 12
-    };
-
-    // Crie um novo mapa no elemento com o ID "mapa"
-    var mapa = new google.maps.Map(document.getElementById('mapa'), opcoesMapa);
-
-    // Adicione um marcador no ponto de encontro
-    var marcador = new google.maps.Marker({
-      position: pontoEncontro,
-      map: mapa,
-      title: 'Ponto de Encontro'
-    });
-  }
-</script>
-
 
 </html>

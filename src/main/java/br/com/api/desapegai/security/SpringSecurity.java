@@ -39,6 +39,9 @@ public class SpringSecurity {
                         authorize.requestMatchers("ad-images/**").permitAll();
                         authorize.requestMatchers("/images/**").permitAll();
                         authorize.requestMatchers("/css/**").permitAll();
+                        authorize.requestMatchers("/fonts/**").permitAll();
+                        authorize.requestMatchers("/js/**").permitAll();
+                        authorize.requestMatchers("/vendor/**").permitAll();
                         authorize.anyRequest().authenticated();
                         
                                 
