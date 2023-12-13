@@ -34,4 +34,4 @@ Se você encontrar algum problema durante a instalação, consulte a documentaç
 
 ## Arquivo application.properties
 
-Para poder executar o programa sem erros, altere o arquivo em src\main\resources\application.properties, colocando sua senha e o acesso ao banco de dados. Alem disso, adicione sua key para utilizar a api do Goole Maps.
+Para poder executar o programa sem erros, altere o arquivo em src\main\resources\application.properties, colocando sua senha e o acesso ao banco de dados. Alem disso, adicione sua key para utilizar a api do Google Maps.
