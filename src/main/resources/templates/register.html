@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 </html>
+<head th:replace="~{fragments :: html_header}"></head>
 
 <head>
     <title>Criar Conta</title>
@@ -26,7 +27,7 @@
 </head>
 
 <body>
-
+    <div th:replace="~{fragments :: html_nav}"></div>
     <div class="limiter">
         <div class="container-login100" >
             <div class="wrap-login100 " style="max-height: 1150px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; padding-right: 100px">

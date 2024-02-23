@@ -28,19 +28,16 @@
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto ">
           <li class="nav-item">
-            <a class="nav-link mx-2 active" aria-current="page" href="/">Inicio</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link mx-2" th:href=@{/anuncios/novo_anuncio}>Desapegar</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mx-2" href="/sobre">Sobre</a>
           </li>
-          <li class="nav-item" sec:authorize="isAnonymous()">
+          <li class="nav-item" sec:authorize="isAnonymous()" style="border-radius: 24px; border: solid; border-width: 1px;">
             <a class="nav-link mx-2" href="" th:href="@{/register}">Cadastrar</a>
           </li>
-          <li class="nav-item" sec:authorize="isAnonymous()">
-            <a class="nav-link mx-2" href="@{/login}">Entrar</a>
+          <li class="nav-item" sec:authorize="isAnonymous()" style="border-radius: 24px; background-color: #7B1980; " >
+            <a class="nav-link mx-2" href="@{/login}" style="color: #ffffff;">Entrar</a>
           </li>
           <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
             <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.username"></a>

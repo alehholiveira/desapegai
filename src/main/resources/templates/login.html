@@ -3,6 +3,8 @@
 
 </html>
 
+<head th:replace="~{fragments :: html_header}"></head>
+
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
@@ -26,7 +28,7 @@
 </head>
 
 <body>
-
+    <div th:replace="~{fragments :: html_nav}"></div>
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
