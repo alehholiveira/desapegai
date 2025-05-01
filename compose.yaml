@@ -18,6 +18,7 @@ services:
     image: postgres:latest
     container_name: postgres-desapegai-db
     environment:
+      TZ: America/Sao_Paulo
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: desapegai

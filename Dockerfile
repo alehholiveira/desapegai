@@ -10,6 +10,8 @@ RUN mvn clean package -DskipTests
 # Stage 2: Run
 FROM openjdk:17-jdk-slim
 
+ENV TZ=America/Sao_Paulo
+
 WORKDIR /app
 COPY --from=builder /app/target/desapegai-0.0.1-SNAPSHOT.jar app.jar
 

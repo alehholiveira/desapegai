@@ -3,7 +3,8 @@ package br.com.api.desapegai.Model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class Ad {
     @Column(nullable = false)
     private String photos;
 
-    private Date publicationDate;
+    private LocalDateTime publicationDate;
     private String status; // Ativo, expirado, vendido, etc.
 
 }

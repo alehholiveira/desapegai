@@ -1,5 +1,4 @@
 package br.com.api.desapegai.Service;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import br.com.api.desapegai.Repository.UserRepository;
 
 
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 public class AdService {
@@ -28,7 +29,7 @@ public class AdService {
         if (userOptional.isPresent()) {
             User seller = userOptional.get();
             ad.setSeller(seller);
-            ad.setPublicationDate(new Date());
+            ad.setPublicationDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
             return adRepository.save(ad);
         } else {
             return null; // Trate o caso em que o usuário não foi encontrado

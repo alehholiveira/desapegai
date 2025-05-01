@@ -30,8 +30,7 @@
                   </h5>
                   <p class="card-text" th:text="${ad.description}"></p>
                   <p id="address" class="card-text" th:text="${ad.seller.address}" onload="carrega_cep(this.id)"></p>
-                  <p class="card-text"><small class="text-muted"> Publicado em: <span
-                        th:text="${#dates.format(ad.publicationDate, 'dd/MM/yyyy HH:mm')}"></span></small></p>
+                  <p class="card-text"><small class ="text-muted"> Publicado em: <span th:text="${#temporals.format(ad.publicationDate, 'dd/MM/yyyy HH:mm', 'America/Sao_Paulo')}"></span></small></p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" sec:authorize="isAuthenticated()">
                             Ver localização média
                     </button>

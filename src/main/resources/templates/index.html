@@ -46,7 +46,7 @@
           </h5>
           <p class="card-text" th:text="${ad.description}"></p>
           <p th:id="${iterStat.index}" class="card-text" th:text="${ad.seller.address}" onload="carrega_cep(this.id)"></p>   
-          <p class="card-text"><small class ="text-muted"> Publicado em: <span th:text="${#dates.format(ad.publicationDate, 'dd/MM/yyyy HH:mm')}"></span></small></p>
+          <p class="card-text"><small class ="text-muted"> Publicado em: <span th:text="${#temporals.format(ad.publicationDate, 'dd/MM/yyyy HH:mm', 'America/Sao_Paulo')}"></span></small></p>
           <a th:href="'/anuncios/' + ${ad.id}" class="btn btn-primary" id="botao">Ver mais</a>
         </div>
       </div>
