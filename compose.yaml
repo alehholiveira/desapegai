@@ -11,6 +11,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/desapegai
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+    volumes:
+      - ./ad-images:/app/ad-images  # Mapeia para um diretório no host
 
   db:
     image: postgres:latest

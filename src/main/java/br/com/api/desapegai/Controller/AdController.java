@@ -68,7 +68,8 @@ public class AdController {
             ad.setPhotos(fileName);
             Ad savedad = adService.createAd(ad, userId);
      
-            String uploadDir = "src/main/resources/static/ad-images/" + savedad.getId();
+
+            String uploadDir = "/app/ad-images/" + savedad.getId();  // Caminho dentro do container
             Path uploadPath =  Paths.get(uploadDir);
 
             if (!Files.exists(uploadPath)) {
