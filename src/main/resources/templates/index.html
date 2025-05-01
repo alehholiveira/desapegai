@@ -35,7 +35,7 @@
     </div>
 
 
-    <h2 class="ms-5 ps-5 mb-3" id="produtos">Produtos:</h2>
+    <h2 class="ms-5 ps-5 mb-3" id="produtos">Anuncios:</h2>
     <div class="d-flex flex-wrap ms-5 ps-5" id="card-css">
     <div th:each="ad, iterStat : ${ads}" class="card ms-5  mt-2" style="width: 18rem;">
         <img th:src="@{'/ad-images/' + ${ad.id} + '/' + ${ad.photos}}" class="card-img-top" alt="...">
