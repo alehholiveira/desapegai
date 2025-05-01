@@ -85,9 +85,11 @@
                             <div class="mb-4">
                                 <label for="image" class="form-label">Imagem Principal</label>
                                 <input class="form-control" th:classappend="${#fields.hasErrors('photos')} ? 'is-invalid' : ''" type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" required>
-                                <!-- Nota: A validação de erro para MultipartFile ('photos' no seu Ad.java?) pode precisar de tratamento especial no controller -->
-                                <div class="form-text">Envie a melhor foto do seu produto (PNG, JPG ou WebP).</div>
+                                <div class="form-text">Envie a melhor foto do seu produto (PNG, JPG ou WebP). Tamanho máximo: 1MB.</div>
+                                <!-- Erro vindo do backend (Thymeleaf) -->
                                 <div class="invalid-feedback" th:if="${#fields.hasErrors('photos')}" th:errors="*{photos}">Erro na imagem</div>
+                                <!-- Erro de tamanho do arquivo (JavaScript) -->
+                                <div id="image-size-error" class="invalid-feedback" style="display: none;">O arquivo selecionado é muito grande. O tamanho máximo é 1MB.</div>
                             </div>
 
                             <!-- Botão Submit -->
@@ -110,91 +112,114 @@
     <script>
         const priceInput = document.getElementById('price');
         const form = document.getElementById('createAdForm');
+        const imageInput = document.getElementById('image'); // Referência ao input de imagem
+        const imageSizeErrorDiv = document.getElementById('image-size-error'); // Referência ao div de erro de tamanho
+        const MAX_FILE_SIZE_MB = 1; // Tamanho máximo em Megabytes
+        const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024; // Tamanho máximo em Bytes
 
-        // Formatter para moeda brasileira (BRL), mas sem exibir o símbolo 'R$'
+        // Formatter para moeda brasileira (BRL)... (código do formatter mantido)
         const currencyFormatter = new Intl.NumberFormat('pt-BR', {
-            style: 'decimal', // Usar 'decimal' em vez de 'currency' para não mostrar R$
+            style: 'decimal',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         });
 
-        // Função para limpar e obter o valor numérico do input
+        // Função para limpar e obter o valor numérico do input... (código mantido)
         function getNumericValue(value) {
             if (!value) return null;
-            // Remove caracteres não numéricos, exceto a última vírgula ou ponto
-            // Permite digitar "123,45" ou "123.45"
             let cleanedValue = value.replace(/[^0-9,.]/g, '');
-            // Troca a vírgula por ponto para conversão para número
             cleanedValue = cleanedValue.replace(',', '.');
-            // Remove pontos extras (caso digite "1.2.3") - mantém apenas o último como decimal
              const parts = cleanedValue.split('.');
              if (parts.length > 1) {
                  cleanedValue = parts.slice(0, -1).join('') + '.' + parts.slice(-1);
              }
-
             const number = parseFloat(cleanedValue);
             return isNaN(number) ? null : number;
         }
 
-        // Função para formatar o valor no input
+        // Função para formatar o valor no input... (código mantido)
         function formatInputPrice(inputElement) {
             const numericValue = getNumericValue(inputElement.value);
-
             if (numericValue !== null && numericValue >= 0) {
-                // Formata o número usando o Intl.NumberFormat
                 inputElement.value = currencyFormatter.format(numericValue);
-                inputElement.classList.remove('is-invalid'); // Remove erro se estava inválido
-                return true; // Válido
+                inputElement.classList.remove('is-invalid');
+                return true;
             } else if (inputElement.value === '') {
-                 inputElement.classList.remove('is-invalid'); // Campo vazio não é inválido aqui, mas pode ser 'required'
-                 return false; // Não é um valor válido para submit se for required
+                 inputElement.classList.remove('is-invalid');
+                 return false;
             } else {
-                // Se não conseguiu converter para número válido (e não está vazio)
-                // Mantém o valor inválido digitado para o usuário ver, mas marca como inválido
                 inputElement.classList.add('is-invalid');
-                return false; // Inválido
+                return false;
             }
         }
 
-        // Formata o valor quando o campo perde o foco (blur)
+        // Função para validar o tamanho do arquivo
+        function validateFileSize(inputElement) {
+            if (inputElement.files && inputElement.files.length > 0) {
+                const file = inputElement.files[0];
+                if (file.size > MAX_FILE_SIZE_BYTES) {
+                    // Arquivo muito grande
+                    inputElement.classList.add('is-invalid'); // Marca o input como inválido
+                    imageSizeErrorDiv.style.display = 'block'; // Mostra a mensagem de erro específica
+                    inputElement.value = ''; // Limpa a seleção do arquivo inválido
+                    // Opcional: Focar no campo para o usuário notar
+                    // inputElement.focus();
+                    return false; // Inválido
+                } else {
+                    // Arquivo dentro do limite
+                    inputElement.classList.remove('is-invalid'); // Remove a marcação de inválido (se houver)
+                    imageSizeErrorDiv.style.display = 'none'; // Esconde a mensagem de erro
+                    return true; // Válido
+                }
+            }
+            // Nenhum arquivo selecionado (pode ser válido ou inválido dependendo do 'required')
+            // Se o campo for 'required', a validação do Bootstrap cuidará disso.
+            imageSizeErrorDiv.style.display = 'none'; // Garante que a msg de erro de tamanho esteja escondida
+            return true; // Considera válido em termos de tamanho (nenhum arquivo para verificar)
+        }
+
+
+        // Formata o preço quando o campo perde o foco (blur)
         priceInput.addEventListener('blur', function() {
             formatInputPrice(this);
         });
 
-        // Opcional: Formata enquanto digita (pode ser um pouco instável dependendo da digitação)
-        // priceInput.addEventListener('input', function(e) {
-        //     // Uma abordagem simples para formatação em tempo real (pode precisar de ajustes)
-        //     let value = e.target.value;
-        //     value = value.replace(/[^0-9,]/g, ''); // Permite apenas números e vírgula
-        //     e.target.value = value;
-        //     // Não formata completamente aqui para não atrapalhar a digitação,
-        //     // a formatação final ocorre no 'blur'.
-        // });
+        // Valida o tamanho do arquivo quando um arquivo é selecionado
+        imageInput.addEventListener('change', function() {
+            validateFileSize(this);
+        });
 
 
         // Adiciona validação Bootstrap no submit
         form.addEventListener('submit', event => {
-            // Formata e valida o preço uma última vez antes de submeter
+            // Formata e valida o preço uma última vez
             const isPriceValid = formatInputPrice(priceInput);
+            // Valida o tamanho do arquivo uma última vez
+            const isFileSizeValid = validateFileSize(imageInput);
 
-            // A validação do Bootstrap (`checkValidity`) verifica os 'required', etc.
-            if (!form.checkValidity() || !isPriceValid) {
+            // Verifica a validação geral do formulário E as validações customizadas
+            if (!form.checkValidity() || !isPriceValid || !isFileSizeValid) {
                 event.preventDefault(); // Impede o envio do formulário
                 event.stopPropagation();
-                // Garante que o campo de preço seja marcado como inválido se a formatação falhar
+
+                // Garante que os campos inválidos sejam marcados (caso a validação inicial tenha falhado)
                 if (!isPriceValid && priceInput.value !== '') {
                      priceInput.classList.add('is-invalid');
                 }
+                 if (!isFileSizeValid && imageInput.files.length === 0 && imageInput.required) {
+                    // Se for requerido e não tiver arquivo (após limpeza por tamanho inválido, por ex.)
+                    imageInput.classList.add('is-invalid');
+                 } else if (!isFileSizeValid) {
+                    // Se falhou por tamanho (já deve ter mostrado a msg e limpado o campo)
+                    imageSizeErrorDiv.style.display = 'block';
+                    imageInput.classList.add('is-invalid');
+                 }
+
             } else {
-                 // IMPORTANTE: Antes de enviar, converta o valor formatado (ex: "1.234,56")
-                 // de volta para um formato que o backend entenda (ex: "1234.56").
-                 // O th:field="*{price}" espera um número.
+                 // Se tudo estiver válido, converte o preço para formato numérico antes de enviar
                  const numericValue = getNumericValue(priceInput.value);
                  if (numericValue !== null) {
-                     // Cria um input hidden ou modifica o valor original para enviar o número puro
-                     // Ou garante que seu Controller Spring consiga parsear "1.234,56" (menos comum)
-                     // Abordagem mais segura: enviar o número puro.
-                     priceInput.value = numericValue.toFixed(2).replace('.', '.'); // Envia com ponto decimal
+                     priceInput.value = numericValue.toFixed(2); // Envia com ponto decimal
                  }
             }
 
