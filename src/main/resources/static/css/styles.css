@@ -31,7 +31,10 @@
   /* card css */
   #card-css .card {
     width: 300px;
-    border: 1px solid #ccc;
+    border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione uma sombra para destacar o card */
@@ -43,6 +46,10 @@
     height: 300px; /* Substitua 200px pela altura desejada */
     object-fit: cover; /* Mantém a proporção da imagem e cobre toda a altura especificada */
     border-bottom: 1px solid #ccc;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
   }
 
   .card-body{
@@ -62,7 +69,7 @@
 
   #produtos{
     color: black;
-    font-weight: bold; /* Adicione negrito, se desejar */
+    font-weight: 600; /* Adicione negrito, se desejar */
     margin-bottom: 10px; /* Adicione margem inferior para espaçamento */
   }
 
@@ -81,5 +88,5 @@
   body {
     background-color: #f3ebe0;
     transition: background-color 1.5s ease;
-}
+  }
 

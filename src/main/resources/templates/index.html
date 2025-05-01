@@ -38,7 +38,7 @@
     <h2 class="ms-5 ps-5 mb-3" id="produtos">Produtos:</h2>
     <div class="d-flex flex-wrap ms-5 ps-5" id="card-css">
     <div th:each="ad, iterStat : ${ads}" class="card ms-5  mt-2" style="width: 18rem;">
-        <img th:src="@{/ad-images/{id}/{photos}(id=${ad.id}, photos=${ad.photos})}" class="card-img-top" alt="...">
+        <img th:src="@{'/ad-images/' + ${ad.id} + '/' + ${ad.photos}}" class="card-img-top" alt="...">
 
         <div class="card-body">
           <h5 class="card-title">
