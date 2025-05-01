@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import br.com.api.desapegai.Model.Ad;
 import br.com.api.desapegai.Model.User;
+import br.com.api.desapegai.Service.AdService;
 import br.com.api.desapegai.Service.UserService;
 import jakarta.validation.Valid;
 
@@ -19,19 +21,12 @@ import java.util.List;
 @Controller
 public class AuthController {
     private UserService userService;
+    private AdService adService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, AdService adService) {
         this.userService = userService;
+        this.adService = adService;
     }
-
-    // handler method to handle home page request
-    @GetMapping("/")
-    public String home(){
-
-        return "index";
-    }
-
- 
 
     // handler method to handle login request
     @GetMapping("/login")
@@ -83,6 +78,14 @@ public class AuthController {
         List<User> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "users";
+    }
+
+        // handler method to handle home page request
+    @GetMapping("/")
+    public String home(Model model){
+        List<Ad> ads = adService.getAllAds();
+        model.addAttribute("ads", ads);
+        return "index";
     }
 
 

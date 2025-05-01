@@ -35,8 +35,13 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll();
                         authorize.requestMatchers("/").permitAll();
                         authorize.requestMatchers("/index").permitAll();
+                        authorize.requestMatchers("/anuncios/**").permitAll();
+                        authorize.requestMatchers("ad-images/**").permitAll();
                         authorize.requestMatchers("/images/**").permitAll();
                         authorize.requestMatchers("/css/**").permitAll();
+                        authorize.requestMatchers("/fonts/**").permitAll();
+                        authorize.requestMatchers("/js/**").permitAll();
+                        authorize.requestMatchers("/vendor/**").permitAll();
                         authorize.anyRequest().authenticated();
                         
                                 
@@ -44,7 +49,7 @@ public class SpringSecurity {
                 form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/login-success")
+                        .defaultSuccessUrl("/login-success", true)
                         .permitAll()
         ).logout(
                 logout -> logout

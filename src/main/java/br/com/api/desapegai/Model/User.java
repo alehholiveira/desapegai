@@ -18,15 +18,25 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable=false)
     private String name;
+
     @Column(nullable=false, unique=true)
     private String username;
+
+    @Column(nullable=false, unique=true)
     private String email;
+
     @Column(nullable=false)
     private String password; 
+
+    @Column(nullable=false)
     private String address;
+
+    @Column(nullable=false, unique=true)
     private String phone;
+    
     @OneToMany(mappedBy = "seller")
     private List<Ad> ads; // Anúncios publicados pelo usuário
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
