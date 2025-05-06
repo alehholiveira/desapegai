@@ -88,6 +88,8 @@ public class AuthController {
         return "index";
     }
 
-
-    
+    @GetMapping("/sobre")
+    public String sobrePage() {
+        return "sobre"; // Isso vai renderizar o arquivo sobre.html
+    }
 }

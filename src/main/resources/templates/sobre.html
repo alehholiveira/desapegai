@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="~{fragments :: html_header(pageTitle='Sobre o Desapegaí')}">
+    <!-- O título da página é passado para o fragmento -->
+</head>
+
+<style>
+    /* CSS customizado para a página Sobre */
+    .sobre-hero {
+        background-color: #f8f9fa; /* Um cinza bem claro, ou sua cor de fundo principal */
+        padding: 3rem 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: .3rem;
+    }
+    .sobre-section {
+        padding: 2.5rem 0;
+    }
+    .sobre-section h2 {
+        color: #343a40; /* Cor escura para títulos de seção */
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        border-radius: .3rem;
+    }
+    .sobre-section p {
+        line-height: 1.7;
+        color: #495057; /* Cor de texto para boa legibilidade */
+        margin-bottom: 1rem;
+    }
+    .highlight-text {
+        color: #ffc107; /* Cor de destaque do seu site */
+        font-weight: bold;
+    }
+    .feature-icon {
+        font-size: 3rem; /* Tamanho dos ícones */
+        color: #ffc107; /* Cor de destaque */
+        margin-bottom: 1rem;
+        display: block; /* Para centralizar com text-center na coluna */
+    }
+    .img-about {
+        max-width: 100%;
+        height: auto;
+        border-radius: .5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,.1);
+    }
+</style>
+
+<body>
+    <div th:replace="~{fragments :: html_nav}"></div>
+
+    <div class="container mt-4 mb-5">
+
+        <div class="sobre-hero text-center">
+            <h1 class="display-5 fw-bold">Conheça o DesapegAí</h1>
+            <p class="lead text-muted col-lg-8 mx-auto">Sua plataforma para dar um novo destino aos seus itens e encontrar achados incríveis com segurança e praticidade.</p>
+        </div>
+
+        <!-- Seção: Nossa Essência -->
+        <section class="sobre-section">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <h2>Nossa Essência: Facilitando o Desapego Inteligente</h2>
+                    <p>O DesapegAí foi idealizado por pessoas que entendem a satisfação de renovar e a importância de um consumo mais consciente. Nascemos para <span class="highlight-text">facilitar a vida</span> de quem deseja desapegar de produtos que já não utiliza mais, conectando-os com quem busca algo novo e especial.</p>
+                    <p>Acreditamos que cada objeto carrega uma história e pode continuar sendo útil e valioso para outra pessoa. Nossa missão é ser a ponte para esses encontros, de forma simples, intuitiva e, acima de tudo, segura.</p>
+                </div>
+                <div class="col-md-5 text-center">
+                    <!-- Você pode adicionar uma imagem representativa aqui -->
+                    <img th:src="@{/images/about-image-1.png}" alt="Desapego Inteligente" class="img-about" />
+                    <!-- Se não tiver a imagem, pode usar um ícone grande: -->
+                    <!-- <i class="bi bi-arrow-repeat feature-icon" style="font-size: 6rem;"></i> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Nosso Diferencial -->
+        <section class="sobre-section bg-light py-5"> <!-- Seção com fundo levemente diferente -->
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5 text-center order-md-2"> <!-- Imagem à direita em telas médias+ -->
+                        <img th:src="@{/images/about-image-2.png}" alt="Segurança e Comunidade" class="img-about"/>
+                        <!-- Se não tiver a imagem, pode usar um ícone grande: -->
+                        <!-- <i class="bi bi-shield-lock feature-icon" style="font-size: 6rem;"></i> -->
+                    </div>
+                    <div class="col-md-7 order-md-1">
+                        <h2>Segurança e Comunidade em Primeiro Lugar</h2>
+                        <p>Sabemos que a confiança é fundamental. Por isso, um dos nossos maiores diferenciais é o foco na <span class="highlight-text">segurança e conforto</span> dos nossos usuários. Oferecemos a sugestão de pontos de encontro para facilitar as negociações presenciais, caso desejem.</p>
+                        <p>Mas o DesapegAí vai além! Nossa plataforma é um espaço acolhedor para todos. Qualquer pessoa que deseje anunciar um produto, seja para desapegar ou para vender algo novo, é muito bem-vinda a fazer parte da nossa comunidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Como Funciona -->
+        <section class="sobre-section">
+            <h2 class="text-center">Como é Fácil Desapegar (e Apegar!)</h2>
+            <div class="row text-center mt-4 g-4">
+                <div class="col-md-4">
+                    <i class="bi bi-camera-fill feature-icon"></i>
+                    <h5>1. Anuncie Rapidinho</h5>
+                    <p class="text-muted">Tire boas fotos, capriche na descrição e publique seu anúncio em poucos minutos. É simples e intuitivo!</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="bi bi-search-heart feature-icon"></i> <!-- Ícone diferente -->
+                    <h5>2. Encontre Tesouros</h5>
+                    <p class="text-muted">Explore diversas categorias, use nossos filtros e encontre exatamente o que você procura, pertinho de você.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="bi bi-people-fill feature-icon"></i>
+                    <h5>3. Negocie e Combine</h5>
+                    <p class="text-muted">Converse diretamente com outros usuários, tire dúvidas e combine a melhor forma de entrega ou encontro.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opcional: Seção sobre o projeto (mais técnica) -->
+        <section class="sobre-section border-top pt-5" th:if="${false}"> <!-- Oculta por padrão -->
+            <div class="text-center">
+                <h2>Sobre o Projeto</h2>
+                <p class="text-muted col-lg-8 mx-auto">Este projeto foi desenvolvido como parte da disciplina de Desenvolvimento de Sistemas Orientados a Objetos, com o objetivo de aplicar e aprofundar os conhecimentos em tecnologias web e boas práticas de programação. Atualmente (Maio/2025), o código está passando por uma reestruturação para adicionar novas features e corrigir bugs antigos.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer (se você tiver um fragmento de footer, adicione aqui) -->
+    <!-- <div th:replace="~{fragments :: html_footer}"></div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
