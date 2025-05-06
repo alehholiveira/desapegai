@@ -106,4 +106,9 @@ public class AuthController {
         }
         return "profile"; 
     }
+
+    @GetMapping("/planos")
+    public String planosPage(Model model) {
+        return "planos"; // Renderiza planos.html
+    }
 }
