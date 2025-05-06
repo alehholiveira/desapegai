@@ -15,6 +15,10 @@ import br.com.api.desapegai.Service.AdService;
 import br.com.api.desapegai.Service.UserService;
 import jakarta.validation.Valid;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import br.com.api.desapegai.security.UserSpringSecurity;
+
 
 import java.util.List;
 
@@ -90,6 +94,16 @@ public class AuthController {
 
     @GetMapping("/sobre")
     public String sobrePage() {
-        return "sobre"; // Isso vai renderizar o arquivo sobre.html
+        return "sobre"; 
+    }
+
+    @GetMapping("/perfil")
+    public String userProfilePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserSpringSecurity) {
+            UserSpringSecurity userDetails = (UserSpringSecurity) authentication.getPrincipal();
+            model.addAttribute("currentUser", userDetails);
+        }
+        return "profile"; 
     }
 }
