@@ -49,8 +49,13 @@
         margin-bottom: 0.5rem;
     }
     .highlight-username {
-        color: #ffc107; /* Cor de destaque */
+        color: #005BFF; /* Cor de destaque */
         font-weight: bold;
+    }
+
+    .press:hover{
+        background-color: white;
+        color: #FF8C00;;
     }
 </style>
 
@@ -101,7 +106,7 @@
                         <hr class="my-4">
 
                         <div class="action-buttons text-center">
-                            <a th:href="@{/perfil/editar}" class="btn btn-outline-primary col-md-5 mx-1">
+                            <a th:href="@{/perfil/editar}" class="btn  col-md-5 mx-1 press" style="background-color: #FF8C00; color: white;">
                                 <i class="bi bi-pencil-square me-2"></i>Editar Perfil
                             </a>
                         </div>

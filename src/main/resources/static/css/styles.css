@@ -1,17 +1,49 @@
 /* nav bar css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  --color1: #FF8C00;
+  --color2: #005BFF;
+  --color3: #005BFF;
+  --color4: #fbecd9;
+}
+
+
 #neubar {
-    background: #fae8d2;
-    box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+    background-color: var(--color4);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.235);
+    border-bottom: var(--color1);
+    border-bottom-style: solid;
+    border-width: 3px;
+    
   }
   
+  li > a{
+   
+    border-radius: 8px;
+    border-width: 1px;
+    padding: 1px;
+    font-size: 1.1em;
+    font-family: "Inter", sans-serif; ;
+    
+  }
+
+  li > a:hover{
+    color: var(--color2);
+  }
+
   .nav-item .active {
     border-radius: 6px;
     background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
     box-shadow:  4px 4px 8px #ddc1a0,
                  -4px -4px 8px #f7e5cc;
+ 
+  }
+  .nav-item .active:hover {
+    color: var(--color3);
   }
   #neubar .dropdown-menu a:hover {
-    color: #454545
+    color: black
   }
   #neubar .nav-item {
     margin : auto 4px;
@@ -22,16 +54,23 @@
     padding-right:12px;
   }
   #neubar .dropdown-menu {
-    background : #f5d7b2
+    background-color: white;
   }
   a.navbar-brand {
     color: #454545
   }
 
+
+  .card-header{
+    border-style: solid;
+    border-color: #005BFF;
+    border-width: 2px;
+    border-bottom: none;
+  }
   /* card css */
   #card-css .card {
     width: 300px;
-    border: none;
+    
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         transition: transform 0.2s ease;
@@ -53,8 +92,11 @@
   }
 
   .card-body{
-    background-color: #f5d7b2;
-    border-color: #ddc1a0;
+    background-color: white;
+    border-color: var(--color3);
+    border-style: solid;
+    border-width: 1px;
+    border-top: none;
   }
 
   .card-text{
@@ -65,6 +107,7 @@
     color: black;
     font-weight: bold; /* Adicione negrito, se desejar */
     margin-bottom: 10px; /* Adicione margem inferior para espaçamento */
+    
   }
 
   #produtos{
@@ -74,19 +117,22 @@
   }
 
   #botao{
-    background: #f5d7b2;
-    color: #392E26;
-    border-color: #ddc1a0;
+    background: white;
+    color: black
+
+    
   }
 
   #botao:hover{
-    background-color: white;
+    color: var(--color1)
   }
-
+ .btn{
+  border-color: var(--color1);
+ }
 
   /* caracteristicas fundo da pagina */
   body {
-    background-color: #f3ebe0;
+    background-color: rgb(237, 233, 233);
     transition: background-color 1.5s ease;
   }
 

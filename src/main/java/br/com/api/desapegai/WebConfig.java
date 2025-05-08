@@ -1,4 +1,4 @@
-package br.com.api.desapegai.Config; // Ajuste o pacote conforme sua estrutura
+package br.com.api.desapegai; // Ajuste o pacote conforme sua estrutura
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

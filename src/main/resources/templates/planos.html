@@ -45,8 +45,8 @@
         padding: 1.5rem 1rem;
     }
     .plan-card.premium .card-header {
-        background-color: #ffc107; /* Cor de destaque para o plano premium */
-        color: #212529;
+        background-color: #FF8C00;; /* Cor de destaque para o plano premium */
+        color: white;
     }
     .plan-card .card-body {
         padding: 2rem;
@@ -99,7 +99,7 @@
         margin-top: auto; /* Empurra o botão para o final do card-body */
     }
     .highlight-feature {
-        color: #ffc107;
+        color: #005BFF;
         font-weight: bold;
     }
     .faq-section {
@@ -111,6 +111,7 @@
         margin-bottom: 2rem;
         color: #343a40;
     }
+
 </style>
 
 <body>
@@ -163,7 +164,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Suporte prioritário (em breve)</li>
                         </ul>
                         <!-- O link do botão deve levar para o fluxo de assinatura -->
-                        <a th:href="@{/pagamento/plano-pro}" class="btn btn-warning btn-choose-plan">Quero ser PRO!</a>
+                        <a th:href="@{/pagamento/plano-pro}" class="btn  btn-choose-plan" style="background-color: #FF8C00; color: white;">Quero ser PRO!</a>
                     </div>
                 </div>
             </div>
